@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Clock } from 'lucide-react'
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 export default function Contact() {
   return (
@@ -7,9 +7,9 @@ export default function Contact() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4 text-black">Contact Us</h1>
           <p className="text-xl text-gray-600">
-            Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            Have questions? We would love to hear from you. Send us a message and we will respond as soon as possible.
           </p>
-        </div>
+        </div> 
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}

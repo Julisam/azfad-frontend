@@ -13,12 +13,11 @@ export default function Courses() {
 
   useEffect(() => {
     
-
     async function fetchCourses() {
       try {
         const data = await getCourses()
         setCourses(data)
-      } catch (err) {
+      } catch (err: unknown) {
         // if (err instanceof Error && err.message.includes('401')) {
         //   // router.push('/login')
         //   setError('Failed to load courses')

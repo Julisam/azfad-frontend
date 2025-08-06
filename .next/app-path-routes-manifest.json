@@ -1,0 +1,11 @@
+{
+  "/favicon.ico/route": "/favicon.ico",
+  "/blog/page": "/blog",
+  "/contact/page": "/contact",
+  "/register/page": "/register",
+  "/login/page": "/login",
+  "/page": "/",
+  "/about/page": "/about",
+  "/courses/page": "/courses",
+  "/_not-found/page": "/_not-found"
+}
