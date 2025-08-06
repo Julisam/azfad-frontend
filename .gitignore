@@ -14,7 +14,7 @@
 /coverage
 
 # next.js /i'm adding .next 
-# /.next/
+/.next/
 /out/
 
 # production
