@@ -10,7 +10,8 @@
       "internal": true,
       "statusCode": 308,
       "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
-    }
+    } 
+    
   ],
   "headers": [],
   "rewrites": {
