@@ -20,12 +20,12 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-100 mb-6">
                 To empower the next generation of tech stars by providing world-class programming 
                 education in Nigeria. We bridge the gap between traditional education and industry 
                 demands through practical, hands-on learning experiences.
               </p>
-              <p className="text-gray-600">
+              <p className="text-gray-100">
                 Our curriculum is designed by prominent industry experts and covers all major 
                 technologies including frontend, backend, mobile, data science, AI, and more.
               </p>

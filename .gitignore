@@ -16,6 +16,7 @@
 # next.js /i'm adding .next 
 /.next/
 /out/
+/src/app/logo-export
 
 # production
 /build

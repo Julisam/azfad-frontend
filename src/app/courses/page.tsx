@@ -1,14 +1,17 @@
 'use client'
 
-import { Clock, Users, Star } from 'lucide-react'
+import { Clock, Users, Star, ShoppingCart } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import { getCourses, Course } from '@/lib/api'
+import { getCourses, Course, addToCart } from '@/lib/api'
+import { useAuth } from '@/contexts/AuthContext'
 import { useRouter } from 'next/navigation'
 
 export default function Courses() {
   const [courses, setCourses] = useState<Course[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [addingToCart, setAddingToCart] = useState<number | null>(null)
+  const { authenticated } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
@@ -30,6 +33,20 @@ export default function Courses() {
     }
     fetchCourses()
   }, [router])
+
+  const handleAddToCart = async (courseId: number) => {
+    setAddingToCart(courseId)
+    try {
+      await addToCart(courseId)
+      // Show success message or redirect to cart
+      router.push('/cart')
+    } catch (error) {
+      console.error('Failed to add to cart:', error)
+      // Show error message
+    } finally {
+      setAddingToCart(null)
+    }
+  }
 
   if (loading) {
     return (
@@ -60,7 +77,7 @@ export default function Courses() {
           {courses.map((course) => (
             <div key={course.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
               {course.images ? (
-                <img src={`http://localhost:3000/images/courses/${course.images}`} alt={course.title} className="h-48 w-full object-cover" />
+                <img src={`/images/courses/${course.images}`} alt={course.title} className="h-48 w-full object-cover" />
               ) : (
                 <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600"></div>
               )}
@@ -87,9 +104,39 @@ export default function Courses() {
                   </div>
                 </div>
                 
-                <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-                  Enroll Now
-                </button>
+                <div className="flex space-x-2">
+                  {authenticated ? (
+                    <>
+                      <button
+                        onClick={() => handleAddToCart(course.id)}
+                        disabled={addingToCart === course.id}
+                        className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition disabled:opacity-50 flex items-center justify-center"
+                      >
+                        {addingToCart === course.id ? (
+                          'Adding...'
+                        ) : (
+                          <>
+                            <ShoppingCart className="w-4 h-4 mr-2" />
+                            Add to Cart
+                          </>
+                        )}
+                      </button>
+                      <button
+                        onClick={() => router.push('/cart')}
+                        className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition"
+                      >
+                        Cart
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => router.push('/login')}
+                      className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+                    >
+                      Login to Enroll
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           ))}

@@ -1,45 +1,30 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { isAuthenticated, logout } from '@/lib/api'
-import { useRouter } from 'next/navigation'
+import { useAuth } from '@/contexts/AuthContext'
+import Logo from './Logo'
+import UserProfileDropdown from './UserProfileDropdown'
 
 export default function Header() {
-  const [authenticated, setAuthenticated] = useState(false)
-  const router = useRouter()
-
-  useEffect(() => {
-    setAuthenticated(isAuthenticated())
-  }, [])
-
-  const handleLogout = () => {
-    logout()
-    setAuthenticated(false)
-    router.push('/')
-  }
+  const { authenticated } = useAuth()
   return (
     <header className="bg-white shadow-sm">
       <nav className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-blue-900">
-            AzFad Coding Academy
+          <Link href="/">
+            <Logo />
           </Link>
-          <div className="hidden md:flex space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600">Home</Link>
-            <Link href="/courses" className="text-gray-700 hover:text-blue-600">Courses</Link>
-            <Link href="/blog" className="text-gray-700 hover:text-blue-600">Blog</Link>
-            <Link href="/about" className="text-gray-700 hover:text-blue-600">About</Link>
-            <Link href="/contact" className="text-gray-700 hover:text-blue-600">Contact</Link>
+          <div className="hidden md:flex space-x-2">
+            <Link href="/" className="text-gray-700 px-4 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">Home</Link>
+            <Link href="/courses" className="text-gray-700 px-4 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">Courses</Link>
+            <Link href="/blog" className="text-gray-700 px-4 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">Blog</Link>
+            <Link href="/about" className="text-gray-700 px-4 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">About</Link>
+            <Link href="/services" className="text-gray-700 px-4 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">Services</Link>
+            <Link href="/contact" className="text-gray-700 px-4 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all duration-200">Contact</Link>
           </div>
           <div className="flex space-x-4">
             {authenticated ? (
-              <button
-                onClick={handleLogout}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
-              >
-                Logout
-              </button>
+              <UserProfileDropdown />
             ) : (
               <>
                 <Link href="/login" className="text-gray-700 px-4 py-2 rounded-lg border border-blue-400 hover:bg-gray-100">

@@ -11,7 +11,7 @@ export default function Home() {
             Empowering the Next Generation of Tech Stars
           </h1>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Learn cutting-edge programming and technology skills with expert instructors in Ijebu Ode, Nigeria. Join our hybrid classes - online and physical.
+            Learn cutting-edge programming and technology skills with expert instructors in Nigeria and abroad. Join our hybrid classes - online and physical.
           </p>
           <div className="flex gap-4 justify-center">
             <Link href="/courses" className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
@@ -23,6 +23,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+
 
       {/* Features */}
       <section className="py-16 bg-gray-50">
@@ -44,6 +46,40 @@ export default function Home() {
               <h3 className="text-xl font-semibold mb-2 text-gray-600">Certificates</h3>
               <p className="text-gray-600">Earn recognized certificates upon successful completion of your courses.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Service */}
+      <section>
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* <h2 className="text-3xl font-bold mb-6">Featured Programme</h2> */}
+            <h3 className="text-2xl font-semibold mb-4">Post-UTME Practice & Simulation Platform</h3>
+            <p className="text-xl mb-8 opacity-90">
+              Specially designed for university aspirants, including OOU candidates.
+              Our comprehensive platform helps students boost confidence, improve speed,
+              and master the exact format of university screening tests.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+                <h4 className="font-semibold mb-2">Real-time CBT Simulation</h4>
+                <p className="text-sm opacity-90">Experience the actual exam environment with our authentic simulation</p>
+              </div>
+              <div className="bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+                <h4 className="font-semibold mb-2">Speed Enhancement</h4>
+                <p className="text-sm opacity-90">Improve your answering speed with timed practice sessions</p>
+              </div>
+              <div className="bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+                <h4 className="font-semibold mb-2">Confidence Building</h4>
+                <p className="text-sm opacity-90">Build confidence through extensive practice and performance tracking</p>
+              </div>
+            </div>
+
+            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              Learn More About Our Platform
+            </button>
           </div>
         </div>
       </section>

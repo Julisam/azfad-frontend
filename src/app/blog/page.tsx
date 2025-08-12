@@ -1,37 +1,37 @@
+'use client'
+
 import Link from 'next/link'
 import { Calendar, User, ArrowRight } from 'lucide-react'
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "Getting Started with React: A Beginner's Guide",
-    excerpt: "Learn the fundamentals of React and start building your first component-based applications.",
-    author: "AzFad Team",
-    date: "2024-01-15",
-    category: "Frontend",
-    readTime: "5 min read"
-  },
-  {
-    id: 2,
-    title: "Python vs JavaScript: Which Should You Learn First?",
-    excerpt: "Compare two of the most popular programming languages and decide which fits your goals.",
-    author: "AzFad Team", 
-    date: "2024-01-12",
-    category: "Programming",
-    readTime: "7 min read"
-  },
-  {
-    id: 3,
-    title: "Building Your First Mobile App with React Native",
-    excerpt: "Step-by-step guide to creating cross-platform mobile applications.",
-    author: "AzFad Team",
-    date: "2024-01-10",
-    category: "Mobile",
-    readTime: "10 min read"
-  }
-]
+import { useState, useEffect } from 'react'
+import { getBlogPosts, BlogPost } from '@/lib/api'
 
 export default function Blog() {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchBlogPosts = async () => {
+      try {
+        const posts = await getBlogPosts()
+        setBlogPosts(posts)
+      } catch (error) {
+        console.error('Failed to fetch blog posts:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    fetchBlogPosts()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-12 flex items-center justify-center">
+        <div className="text-xl">Loading blog posts...</div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-6">
@@ -60,36 +60,39 @@ export default function Blog() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
-            <article key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-              <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600"></div>
-              <div className="p-6">
-                <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
-                  <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">{post.category}</span>
-                  <span>{post.readTime}</span>
-                </div>
-                <h2 className="text-xl font-semibold mb-3 text-black hover:text-blue-600">
-                  <Link href={`/blog/${post.id}`}>{post.title}</Link>
-                </h2>
-                <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                <div className="flex items-center justify-between text-sm text-gray-500">
-                  <div className="flex items-center">
-                    <User className="w-4 h-4 mr-1" />
-                    {post.author}
+        {blogPosts.length === 0 ? (
+          <div className="text-center py-12">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">No blog posts yet</h2>
+            <p className="text-gray-600">Check back soon for exciting content!</p>
+          </div>
+        ) : (
+          <div className="grid lg:grid-cols-3 gap-8">
+            {blogPosts.map((post) => (
+              <article key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+                <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600"></div>
+                <div className="p-6">
+                  <h2 className="text-xl font-semibold mb-3 text-black hover:text-blue-600">
+                    <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                  </h2>
+                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                  <div className="flex items-center justify-between text-sm text-gray-500">
+                    <div className="flex items-center">
+                      <User className="w-4 h-4 mr-1" />
+                      {post.author_name}
+                    </div>
+                    <div className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {new Date(post.created_at).toLocaleDateString()}
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    {new Date(post.date).toLocaleDateString()}
-                  </div>
+                  <Link href={`/blog/${post.slug}`} className="inline-flex items-center text-blue-600 font-semibold mt-4 hover:text-blue-800">
+                    Read More <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
                 </div>
-                <Link href={`/blog/${post.id}`} className="inline-flex items-center text-blue-600 font-semibold mt-4 hover:text-blue-800">
-                  Read More <ArrowRight className="w-4 h-4 ml-1" />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
+        )}
 
         <div className="text-center mt-12">
           <p className="text-gray-600 mb-4">Want to contribute to our blog?</p>
