@@ -26,6 +26,7 @@ export default function Courses() {
         //   setError('Failed to load courses')
         // } else {
         // }
+        console.log(err)
         setError('Failed to load courses')
       } finally {
         setLoading(false)

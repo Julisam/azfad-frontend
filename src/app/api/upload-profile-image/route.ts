@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
         await unlink(oldPath)
       } catch (error) {
         console.log('Old file not found or already deleted')
+        console.log(error)
       }
     }
 
