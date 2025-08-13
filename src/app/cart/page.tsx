@@ -129,7 +129,7 @@ export default function Cart() {
                 ))}
               </div>
 
-              <div className="lg:col-span-1">
+              <div className="lg:col-span-1 text-gray-800">
                 <div className="bg-white rounded-lg shadow-sm p-6 sticky top-8">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Order Summary</h3>
                   <div className="space-y-2 mb-4">
