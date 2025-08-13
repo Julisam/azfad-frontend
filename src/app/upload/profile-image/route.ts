@@ -14,9 +14,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 })
     }
 
-    // Validate file type
+    // Validate file type and size
     if (!file.type.startsWith('image/')) {
       return NextResponse.json({ error: 'File must be an image' }, { status: 400 })
+    }
+
+    if (file.size > 1024 * 1024) {
+      return NextResponse.json({ error: 'File size must be less than 1MB' }, { status: 400 })
     }
 
     // Generate random filename
@@ -37,7 +41,6 @@ export async function POST(request: NextRequest) {
         await unlink(oldPath)
       } catch (error) {
         console.log('Old file not found or already deleted')
-        console.log(error)
       }
     }
 

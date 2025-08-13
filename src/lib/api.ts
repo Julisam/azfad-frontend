@@ -249,7 +249,7 @@ export async function uploadProfileImage(imageFile: File, oldFilename?: string):
     formData.append('oldFilename', oldFilename)
   }
 
-  const response = await fetch('/next-api/upload-profile-image', {
+  const response = await fetch('/upload/profile-image', {
     method: 'POST',
     body: formData,
   })
