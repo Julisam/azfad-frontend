@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { verifyPayment } from '@/lib/api'
 import { CheckCircle, XCircle, Loader } from 'lucide-react'
 
-export default function PaymentCallback() {
+function PaymentCallbackContent() {
   const [status, setStatus] = useState<'loading' | 'success' | 'failed'>('loading')
   const [message, setMessage] = useState('')
   const router = useRouter()
@@ -75,5 +75,13 @@ export default function PaymentCallback() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function PaymentCallback() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center"><Loader className="w-16 h-16 text-blue-600 animate-spin" /></div>}>
+      <PaymentCallbackContent />
+    </Suspense>
   )
 }
