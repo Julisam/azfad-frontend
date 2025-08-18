@@ -310,6 +310,41 @@ export async function removeFromCart(cartItemId: number): Promise<void> {
   }
 }
 
+export async function initializePayment(cartItemIds: number[]): Promise<{authorization_url: string}> {
+  const response = await fetch(`${API_BASE_URL}/payment/initialize/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(await getAuthHeaders()),
+    },
+    body: JSON.stringify({ cart_items: cartItemIds }),
+  })
+  
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.error || 'Payment initialization failed')
+  }
+  console.log('HELLO')
+  return response.json()
+  
+}
+
+export async function verifyPayment(reference: string): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/payment/verify/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(await getAuthHeaders()),
+    },
+    body: JSON.stringify({ reference }),
+  })
+  
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.error || 'Payment verification failed')
+  }
+}
+
 export async function checkout(cartItemIds: number[]): Promise<void> {
   const response = await fetch(`${API_BASE_URL}/checkout/`, {
     method: 'POST',

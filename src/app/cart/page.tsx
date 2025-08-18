@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { getCart, removeFromCart, checkout, CartItem } from '@/lib/api'
+import { getCart, removeFromCart, initializePayment, CartItem } from '@/lib/api'
 import { Trash2, ShoppingCart } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import ProtectedRoute from '@/components/ProtectedRoute'
@@ -44,11 +44,10 @@ export default function Cart() {
     
     setProcessing(true)
     try {
-      await checkout(selectedItems)
-      router.push('/my-courses')
+      const { authorization_url } = await initializePayment(selectedItems)
+      window.location.href = authorization_url
     } catch (error) {
-      console.error('Checkout failed:', error)
-    } finally {
+      // console.error('Payment initialization failed:', error)
       setProcessing(false)
     }
   }
