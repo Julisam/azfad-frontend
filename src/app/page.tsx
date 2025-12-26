@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-900 to-purple-900 text-white py-20">
+      <section className="bg-linear-to-br from-blue-900 to-purple-900 text-white py-20">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold mb-6">
             Empowering the Next Generation of Tech Stars
@@ -52,7 +52,7 @@ export default function Home() {
 
       {/* Featured Service */}
       <section>
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white">
+        <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white">
           <div className="max-w-4xl mx-auto text-center">
             {/* <h2 className="text-3xl font-bold mb-6">Featured Programme</h2> */}
             <h3 className="text-2xl font-semibold mb-4">Post-UTME Practice & Simulation Platform</h3>

@@ -80,7 +80,7 @@ export default function Courses() {
               {course.images ? (
                 <img src={`/images/courses/${course.images}`} alt={course.title} className="h-48 w-full object-cover" />
               ) : (
-                <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600"></div>
+                <div className="h-48 bg-linear-to-br from-blue-500 to-purple-600"></div>
               )}
               <div className="p-6">
                 <div className="flex justify-between items-start mb-2">

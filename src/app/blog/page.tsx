@@ -36,7 +36,7 @@ export default function Blog() {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-6">
         {/* Summer Camp Banner */}
-        <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg p-8 mb-12">
+        <div className="bg-linear-to-r from-orange-500 to-red-500 text-white rounded-lg p-8 mb-12">
           <div className="text-center">
             <h2 className="text-3xl font-bold mb-4">🏕️ Summer Coding Camp 2024</h2>
             <p className="text-xl mb-6">
@@ -69,7 +69,7 @@ export default function Blog() {
           <div className="grid lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
               <article key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-                <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600"></div>
+                <div className="h-48 bg-linear-to-br from-blue-500 to-purple-600"></div>
                 <div className="p-6">
                   <h2 className="text-xl font-semibold mb-3 text-black hover:text-blue-600">
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>

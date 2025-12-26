@@ -11,7 +11,7 @@ export default function Services() {
         </div>
 
         {/* Featured Service */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white">
+        <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Featured Service</h2>
             <h3 className="text-2xl font-semibold mb-4">Post-UTME Practice & Simulation Platform</h3>

@@ -61,7 +61,7 @@ export default function BlogPostPage() {
         </Link>
 
         <article className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="h-64 bg-gradient-to-br from-blue-500 to-purple-600"></div>
+          <div className="h-64 bg-linear-to-br from-blue-500 to-purple-600"></div>
           
           <div className="p-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-4">{post.title}</h1>
