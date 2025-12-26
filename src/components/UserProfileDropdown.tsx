@@ -1,9 +1,7 @@
-'use client'
-
 import { useState, useRef, useEffect } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
+import { getMediaUrl } from '@/lib/api'
 
 export default function UserProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false)
@@ -11,7 +9,7 @@ export default function UserProfileDropdown() {
   const [userImage, setUserImage] = useState<string | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const { logout } = useAuth()
-  const router = useRouter()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const firstName = localStorage.getItem('user_first_name') || ''
@@ -20,7 +18,7 @@ export default function UserProfileDropdown() {
     setInitials(userInitials || 'U')
     
     const imageFilename = localStorage.getItem('user_image_filename')
-    setUserImage(imageFilename ? `/profilepics/${imageFilename}` : null)
+    setUserImage(imageFilename ? getMediaUrl(imageFilename) : null)
 
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -34,7 +32,7 @@ export default function UserProfileDropdown() {
 
   const handleLogout = () => {
     logout()
-    router.push('/')
+    navigate('/')
     setIsOpen(false)
   }
 
@@ -59,7 +57,7 @@ export default function UserProfileDropdown() {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
           <Link
-            href="/profile"
+            to="/profile"
             className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50"
             onClick={() => setIsOpen(false)}
           >
@@ -70,7 +68,7 @@ export default function UserProfileDropdown() {
           </Link>
           
           <Link
-            href="/my-courses"
+            to="/my-courses"
             className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50"
             onClick={() => setIsOpen(false)}
           >
@@ -81,7 +79,7 @@ export default function UserProfileDropdown() {
           </Link>
 
           <Link
-            href="/cart"
+            to="/cart"
             className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50"
             onClick={() => setIsOpen(false)}
           >
@@ -92,8 +90,7 @@ export default function UserProfileDropdown() {
           </Link>
 
           <Link
-            // href="/messages"
-            href="#"
+            to="#"
             className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50"
             onClick={() => setIsOpen(false)}
           >
@@ -104,8 +101,7 @@ export default function UserProfileDropdown() {
           </Link>
 
           <Link
-            // href="/settings"
-            href="#"
+            to="#"
             className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50"
             onClick={() => setIsOpen(false)}
           >

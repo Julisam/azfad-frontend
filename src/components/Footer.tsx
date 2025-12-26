@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
@@ -12,26 +12,26 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Courses</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><Link href="/courses" className="hover:text-white">Frontend Development</Link></li>
-              <li><Link href="/courses" className="hover:text-white">Backend Development</Link></li>
-              <li><Link href="/courses" className="hover:text-white">Data Science & AI</Link></li>
-              <li><Link href="/courses" className="hover:text-white">Mobile Development</Link></li>
+              <li><Link to="/courses" className="hover:text-white">Frontend Development</Link></li>
+              <li><Link to="/courses" className="hover:text-white">Backend Development</Link></li>
+              <li><Link to="/courses" className="hover:text-white">Data Science & AI</Link></li>
+              <li><Link to="/courses" className="hover:text-white">Mobile Development</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><Link href="/about" className="hover:text-white">About Us</Link></li>
-              <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-              <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
+              <li><Link to="/about" className="hover:text-white">About Us</Link></li>
+              <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+              <li><Link to="/blog" className="hover:text-white">Blog</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Support</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><Link href="/help" className="hover:text-white">Help Center</Link></li>
-              <li><Link href="/privacy" className="hover:text-white">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-white">Terms of Service</Link></li>
+              <li><Link to="/help" className="hover:text-white">Help Center</Link></li>
+              <li><Link to="/privacy" className="hover:text-white">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="hover:text-white">Terms of Service</Link></li>
             </ul>
           </div>
         </div>

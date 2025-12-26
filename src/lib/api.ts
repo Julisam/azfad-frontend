@@ -1,6 +1,21 @@
 import { jwtDecode } from 'jwt-decode'
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api'
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
+const UPLOAD_URL = import.meta.env.VITE_UPLOAD_URL || `${API_BASE_URL}/profile/image/`
+const MEDIA_BASE_URL =
+  import.meta.env.VITE_MEDIA_URL || API_BASE_URL.replace(/\/api\/?$/, '')
+
+export function getMediaUrl(path: string | null | undefined): string {
+  if (!path) return ''
+  if (path.startsWith('http://') || path.startsWith('https://')) return path
+
+  const normalized = path.startsWith('/') ? path : `/${path}`
+  if (normalized.startsWith('/media/')) {
+    return `${MEDIA_BASE_URL}${normalized}`
+  }
+
+  return `${MEDIA_BASE_URL}/media${normalized}`
+}
 
 export interface Course {
   id: number
@@ -242,15 +257,21 @@ export async function updateProfile(profile: Partial<Profile>): Promise<Profile>
   return response.json()
 }
 
-export async function uploadProfileImage(imageFile: File, oldFilename?: string): Promise<{ filename: string }> {
+export async function uploadProfileImage(
+  imageFile: File,
+  oldFilename?: string
+): Promise<{ filename: string; url?: string }> {
   const formData = new FormData()
   formData.append('image', imageFile)
   if (oldFilename) {
     formData.append('oldFilename', oldFilename)
   }
 
-  const response = await fetch('/upload/profile-image', {
+  const response = await fetch(UPLOAD_URL, {
     method: 'POST',
+    headers: {
+      ...(await getAuthHeaders()),
+    },
     body: formData,
   })
 
